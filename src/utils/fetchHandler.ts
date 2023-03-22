@@ -1,6 +1,7 @@
 import Handsontable from "handsontable/base";
 import { DecodeVinValuesResponse } from "../types/DecodeVinValues";
 import { clearRows } from "../CustomTable";
+import { vehicleTypeMap } from "./vehicleTypeMap";
 
 export type FetchRequest =
   | {
@@ -60,6 +61,15 @@ export class FetchHandler {
             this.instance.setDataAtCell(row, 5, response.vehicleType || "N/A");
             this.instance.setDataAtCell(row, 6, response.bodyClass || "N/A");
             this.instance.setDataAtCell(row, 7, response.gvwr || "N/A");
+            this.instance.setDataAtCell(
+              row,
+              8,
+              vehicleTypeMap.has(response.bodyClass)
+                ? `https://vpic.nhtsa.dot.gov/decoder/Images/5/${vehicleTypeMap.get(
+                    response.bodyClass
+                  )}.png`
+                : "N/A"
+            );
           }
         } catch (error) {
           if (error instanceof Error && error.name !== "AbortError") {

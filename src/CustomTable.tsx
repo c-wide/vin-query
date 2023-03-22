@@ -4,13 +4,45 @@ import { registerAllModules } from "handsontable/registry";
 import { HotTable } from "@handsontable/react";
 import { debounce } from "./utils/debounce";
 import { FetchHandler } from "./utils/fetchHandler";
+import { textRenderer } from "handsontable/renderers/textRenderer";
+import Core from "handsontable/core";
+import { CellProperties } from "handsontable/settings";
 
 import "handsontable/dist/handsontable.full.min.css";
 
 registerAllModules();
 
+const linkRenderer = (
+  _1: Core,
+  td: HTMLTableCellElement,
+  _2: number,
+  _3: number,
+  _4: string | number,
+  value: unknown,
+  _5: CellProperties
+) => {
+  const escaped = `${value}`;
+
+  if (escaped.indexOf("https") === 0) {
+    const a = document.createElement("a");
+
+    a.href = escaped;
+    a.target = "_blank";
+    a.innerHTML = "View Image";
+
+    td.innerText = "";
+    td.className = "htCenter htMiddle";
+
+    td.appendChild(a);
+  } else {
+    textRenderer.apply(this, [_1, td, _2, _3, _4, value, _5]);
+  }
+
+  return td;
+};
+
 const columns = [
-  { data: 0, type: "text" },
+  { data: 0, type: "text", className: "htCenter htMiddle" },
   {
     data: 1,
     type: "numeric",
@@ -25,13 +57,21 @@ const columns = [
       }
     },
     allowInvalid: false,
+    className: "htCenter htMiddle",
   },
-  { data: 2, type: "text", readOnly: true },
-  { data: 3, type: "text", readOnly: true },
-  { data: 4, type: "text", readOnly: true },
-  { data: 5, type: "text", readOnly: true },
-  { data: 6, type: "text", readOnly: true },
-  { data: 7, type: "text", readOnly: true },
+  { data: 2, type: "text", readOnly: true, className: "htCenter htMiddle" },
+  { data: 3, type: "text", readOnly: true, className: "htCenter htMiddle" },
+  { data: 4, type: "text", readOnly: true, className: "htCenter htMiddle" },
+  { data: 5, type: "text", readOnly: true, className: "htCenter htMiddle" },
+  { data: 6, type: "text", readOnly: true, className: "htCenter htMiddle" },
+  { data: 7, type: "text", readOnly: true, className: "htCenter htMiddle" },
+  {
+    data: 8,
+    type: "text",
+    readOnly: true,
+    className: "htCenter htMiddle",
+    renderer: linkRenderer,
+  },
 ];
 
 export function clearRows(
@@ -149,9 +189,10 @@ function CustomTable() {
         "Type",
         "Class",
         "GVWR",
+        "Image",
       ]}
       columns={columns}
-      maxCols={8}
+      maxCols={9}
       minSpareRows={1}
       rowHeaders={true}
       manualColumnResize={false}
