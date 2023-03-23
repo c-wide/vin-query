@@ -30,10 +30,46 @@ const linkRenderer = (
     a.target = "_blank";
     a.innerHTML = "View Image";
 
+    const preview = document.createElement("img");
+    preview.src = escaped;
+    preview.classList.add("image-preview");
+
+    a.addEventListener("mouseover", (e) => {
+      const event = e as MouseEvent;
+      const xOffset = 20;
+      const yOffset = 20;
+      preview.style.display = "block";
+      preview.style.opacity = "0"; // Set to invisible initially
+      const imgWidth = preview.offsetWidth;
+      const imgHeight = preview.offsetHeight;
+      const pageWidth = window.innerWidth;
+      const pageHeight = window.innerHeight;
+
+      let left = event.pageX + xOffset;
+      let top = event.pageY + yOffset;
+
+      // Adjust the position if the image goes off the edge of the page
+      if (left + imgWidth > pageWidth) {
+        left = pageWidth - imgWidth - xOffset;
+      }
+      if (top + imgHeight > pageHeight) {
+        top = pageHeight - imgHeight - yOffset;
+      }
+
+      preview.style.left = `${left}px`;
+      preview.style.top = `${top}px`;
+      preview.style.opacity = "1"; // Make it visible after positioning
+    });
+
+    a.addEventListener("mouseout", () => {
+      preview.style.display = "none";
+    });
+
     td.innerText = "";
     td.className = "htCenter htMiddle";
 
     td.appendChild(a);
+    document.body.appendChild(preview);
   } else {
     textRenderer.apply(this, [_1, td, _2, _3, _4, value, _5]);
   }

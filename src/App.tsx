@@ -5,6 +5,8 @@ import { useDarkMode } from "./hooks/useDarkMode";
 import lightLogo from "./assets/logo-light.svg";
 import darkLogo from "./assets/logo-dark.svg";
 
+import "./App.css";
+
 export default function App() {
   const [darkMode, toggleDarkMode] = useDarkMode();
   const [transitionDuration, setTransitionDuration] = useState(0);

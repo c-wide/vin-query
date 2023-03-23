@@ -1,0 +1,11 @@
+.image-preview {
+  display: none;
+  position: absolute;
+  max-width: 200px;
+  max-height: 200px;
+  z-index: 9999;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  background-color: #fff;
+  overflow: hidden;
+}
