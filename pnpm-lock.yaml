@@ -6,6 +6,7 @@ specifiers:
   '@heroicons/react': ^2.0.16
   '@types/react': ^18.0.27
   '@types/react-dom': ^18.0.10
+  '@vercel/analytics': ^1.0.1
   '@vitejs/plugin-react-swc': ^3.0.0
   autoprefixer: ^10.4.14
   clsx: ^1.2.1
@@ -21,6 +22,7 @@ dependencies:
   '@handsontable/react': 12.3.1_handsontable@12.3.1
   '@headlessui/react': 1.7.13_biqbaboplfbrettd7655fr4n2y
   '@heroicons/react': 2.0.16_react@18.2.0
+  '@vercel/analytics': 1.0.1
   clsx: 1.2.1
   handsontable: 12.3.1
   react: 18.2.0
@@ -419,6 +421,10 @@ packages:
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
     dev: true
+
+  /@vercel/analytics/1.0.1:
+    resolution: {integrity: sha512-Ux0c9qUfkcPqng3vrR0GTrlQdqNJ2JREn/2ydrVuKwM3RtMfF2mWX31Ijqo1opSjNAq6rK76PwtANw6kl6TAow==}
+    dev: false
 
   /@vitejs/plugin-react-swc/3.2.0_vite@4.1.4:
     resolution: {integrity: sha512-IcBoXL/mcH7JdQr/nfDlDwTdIaH8Rg7LpfQDF4nAht+juHWIuv6WhpKPCSfY4+zztAaB07qdBoFz1XCZsgo3pQ==}
